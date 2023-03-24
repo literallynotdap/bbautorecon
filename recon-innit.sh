@@ -9,13 +9,6 @@ NC='\033[0m' # No Color
 
 sudo chown -R $USER:$USER /opt
 
-# Create the output directory if it doesn't exist
-OUTPUT_DIR="/opt/automated-recon"
-if [ ! -d "$OUTPUT_DIR" ]; then
-    echo -e "${YELLOW}Creating $OUTPUT_DIR...${NC}"
-    mkdir "$OUTPUT_DIR"
-fi
-
 # Check if Reconftw is installed
 if [ ! -d "/opt/reconftw" ]; then
   echo "${YELLOW}Reconftw is not installed. Installing from Github...${NC}"
