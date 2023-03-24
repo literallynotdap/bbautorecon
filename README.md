@@ -3,14 +3,14 @@
 ## Automated Recon
 
 This is a Bash script that automates the reconnaissance process for bug bounty hunters and security researchers. The script first uses the bbscope tool to gather data from various bug bounty platforms, and then uses reconftw to perform reconnaissance on the discovered targets.
-Requirements
 
-    - Bash shell
+### Requirements
+
     - bbscope tool (installed via GO111MODULE=on go install github.com/sw33tLie/bbscope@latest)
     - reconftw tool (installed automatically if not found in /opt/reconftw)
     - API token from a bug bounty platform (e.g. HackerOne)
 
-## Usage
+### Usage
 
     - Clone the repository: git clone https://github.com/username/repo.git
     - cd into the cloned directory: cd repo
