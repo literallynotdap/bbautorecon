@@ -32,8 +32,6 @@ else
 
 fi
 
-
-
 # Prompt user for API token, username, and platform
 echo ""
 read -p "Enter your API token: " APITOKEN
