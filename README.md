@@ -14,8 +14,9 @@ This is a Bash script that automates the reconnaissance process for bug bounty h
 cd /opt
 git clone https://github.com/literallynotdap/bbautorecon
 cd bbautorecon
+chmod +x bbautorecon.sh
 # run bbautorecon
-./bbautorecon
+./bbautorecon.sh
 ```
 
 Follow the prompts to enter your API token, username, platform, and flags for bbscope and reconftw. The script will automatically install reconftw if it is not found on your system.
