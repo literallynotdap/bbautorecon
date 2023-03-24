@@ -12,10 +12,14 @@ This is a Bash script that automates the reconnaissance process for bug bounty h
 
 ### Usage
 
-    - Clone the repository: git clone https://github.com/username/repo.git
-    - cd into the cloned directory: cd repo
-    - Make the script executable: chmod +x automated-recon.sh
-    - Run the script: ./automated-recon.sh
+    - Clone the repository: 
+        `git clone https://github.com/literallynotdap/bbautorecon`
+    - cd into the cloned directory: 
+        `cd repo`
+    - Make the script executable:
+        `chmod +x automated-recon.sh`
+    - Run the script:
+        `./automated-recon.sh`
 
 Follow the prompts to enter your API token, username, platform, and flags for bbscope and reconftw. The script will automatically install reconftw if it is not found on your system.
 
