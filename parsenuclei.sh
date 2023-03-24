@@ -7,40 +7,34 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Remove old report file and create a new one
-rm -f nuclei_scope_report.txt
-touch nuclei_scope_report.txt
+> nuclei_scope_report.txt
 
 # Find all nuclei_output directories and print the parent directory followed by that name
-find . -name "nuclei_output" -type d 2>/dev/null | while read dir; do
+find . -name "nuclei_output" -type d -print0 2>/dev/null | while read -d $'\0' dir; do
   echo "Directory: $dir" >> nuclei_scope_report.txt
   echo "Directory: $dir"
-  find "$dir" -type f -name '*.txt' -print 2>/dev/null | while read file; do
-    if grep -q "high.txt\|critical.txt" "$file"; then
-      echo -e "\033[0;31m$file\033[0m" | tee -a nuclei_scope_report.txt
-      echo "" | tee -a nuclei_scope_report.txt
-      cat "$file" | tee -a nuclei_scope_report.txt
-      echo "" | tee -a nuclei_scope_report.txt
-    elif grep -q "medium.txt" "$file"; then
-      echo -e "\033[0;33m$file\033[0m" | tee -a nuclei_scope_report.txt
-      echo "" | tee -a nuclei_scope_report.txt
-      cat "$file" | tee -a nuclei_scope_report.txt
-      echo "" | tee -a nuclei_scope_report.txt
-    elif grep -q "low.txt" "$file"; then
-      echo -e "\033[1;33m$file\033[0m" | tee -a nuclei_scope_report.txt
-      echo "" | tee -a nuclei_scope_report.txt
-      cat "$file" | tee -a nuclei_scope_report.txt
-      echo "" | tee -a nuclei_scope_report.txt
-    else
-      echo "$file" | tee -a nuclei_scope_report.txt
-      cat "$file" | tee -a nuclei_scope_report.txt
+  find "$dir" -type f -name '*.txt' -print0 2>/dev/null | while read -d $'\0' file; do
+    output=$(cat "$file")
+    echo "$output" >> nuclei_scope_report.txt
+    color=$NC
+    if echo "$output" | grep -q "\[critical\]\|\[high\]"; then
+      color=$RED
+    elif echo "$output" | grep -q "\[medium\]"; then
+      color=$ORANGE
+    elif echo "$output" | grep -q "\[low\]"; then
+      color=$YELLOW
     fi
+    echo -e "${color}$file${NC}"
+    echo -e "${color}$output${NC}"
   done
 done | grep -E "\[(low|medium|high|critical)\]" | while read line; do
+  color=$NC
   if echo "$line" | grep -q "\[critical\]\|\[high\]"; then
-    echo -e "${RED}$line${NC}"
+    color=$RED
   elif echo "$line" | grep -q "\[medium\]"; then
-    echo -e "${ORANGE}$line${NC}"
+    color=$ORANGE
   elif echo "$line" | grep -q "\[low\]"; then
-    echo -e "${YELLOW}$line${NC}"
+    color=$YELLOW
   fi
+  echo -e "${color}$line${NC}"
 done
