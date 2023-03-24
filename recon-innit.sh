@@ -77,7 +77,6 @@ echo "$TARGET_SCOPE" > "$OUTPUT_DIR/target_scope.txt"
 cd /opt/reconftw
 
 # Prompt user for command flags for running reconftw.sh
-echo -e "${BLUE}\nRunning reconftw.sh...${NC}"
 echo ""
 echo -e "${YELLOW}Run reconftw help in /opt/reconftw directory to see all flags\n  (e.g. cd /opt/reconftw && ./reconftw.sh --help)${NC}"
 echo ""
@@ -86,4 +85,6 @@ echo -e "   -> You don't need to provide the host list with -l, it's already pro
 read -p  "ReconFTW Flags: " RECONFTW_FLAGS
 
 # Run reconftw.sh with the specified flags
+echo ""
+echo -e "${BLUE}\nRunning reconftw.sh...${NC}"
 ./reconftw.sh $RECONFTW_FLAGS -l "$OUTPUT_DIR/target_scope.txt" -a --deep 2>/dev/null
