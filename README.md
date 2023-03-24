@@ -1,5 +1,7 @@
 # bbautorecon
 
+![image](bbautorecon.png)
+
 This is a Bash script that automates the reconnaissance process for bug bounty hunters and security researchers. The script first uses the bbscope tool to gather data from various bug bounty platforms, and then uses reconftw to perform reconnaissance on the discovered targets.
 
 ## Requirements
